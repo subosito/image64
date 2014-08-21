@@ -1,3 +1,4 @@
+// Package image64 provides functionality to convert image to base64 data URI scheme
 package image64
 
 import (
@@ -55,7 +56,7 @@ func Encode(r io.Reader) (string, error) {
 	return format(b)
 }
 
-// EncodeFile open filename and convert it to base64 data URI scheme
+// EncodeFile opens filename and converts the contents to base64 data URI scheme
 func EncodeFile(filename string) (string, error) {
 	b, err := ioutil.ReadFile(filename)
 	if err != nil {

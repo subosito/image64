@@ -5,45 +5,63 @@ import (
 	"os"
 	"strings"
 	"testing"
+	"fmt"
 )
 
+var fixtures = []string{
+	"test_image.bmp",
+	"test_image.gif",
+	"test_image.ico",
+	"test_image.jpg",
+	"test_image.png",
+	"test_image.webp",
+}
+
 func TestEncode(t *testing.T) {
-	f, err := os.Open("fixtures/test_image.png")
-	if err != nil {
-		t.Fatal(err.Error())
-	}
+	for i := range fixtures {
+		x := fixtures[i]
 
-	e, err := ioutil.ReadFile("fixtures/test_image.txt")
-	if err != nil {
-		t.Fatal(err.Error())
-	}
+		f, err := os.Open(fmt.Sprintf("fixtures/%s", x))
+		if err != nil {
+			t.Fatal(err)
+		}
 
-	s, err := Encode(f)
-	if err != nil {
-		t.Fatal(err.Error())
-	}
+		e, err := ioutil.ReadFile(fmt.Sprintf("fixtures/%s.txt", x))
+		if err != nil {
+			t.Fatal(err)
+		}
 
-	n := strings.TrimSpace(string(e))
+		s, err := Encode(f)
+		if err != nil {
+			t.Fatal(err)
+		}
 
-	if n != s {
-		t.Fatal("expected string is not equal")
+		n := strings.TrimSpace(string(e))
+
+		if n != s {
+			t.Fatalf("expected string is not equal: %q != %q", n, s)
+		}
 	}
 }
 
 func TestEncodeFile(t *testing.T) {
-	s, err := EncodeFile("fixtures/test_image.png")
-	if err != nil {
-		t.Fatal(err.Error())
-	}
+	for i := range fixtures {
+		x := fixtures[i]
 
-	e, err := ioutil.ReadFile("fixtures/test_image.txt")
-	if err != nil {
-		t.Fatal(err.Error())
-	}
+		s, err := EncodeFile(fmt.Sprintf("fixtures/%s", x))
+		if err != nil {
+			t.Fatal(err.Error())
+		}
 
-	n := strings.TrimSpace(string(e))
+		e, err := ioutil.ReadFile(fmt.Sprintf("fixtures/%s.txt", x))
+		if err != nil {
+			t.Fatal(err.Error())
+		}
 
-	if n != s {
-		t.Fatal("expected string is not equal")
+		n := strings.TrimSpace(string(e))
+
+		if n != s {
+			t.Fatalf("expected string is not equal: %q != %q", n, s)
+		}
 	}
 }

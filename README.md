@@ -4,3 +4,9 @@
 
 Convert an image to base64 data URI scheme
 
+## Installation
+
+```
+$ go get github.com/subosito/image64
+```
+
