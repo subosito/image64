@@ -1,10 +1,10 @@
 package image64
 
 import (
+	"io/ioutil"
+	"os"
 	"strings"
 	"testing"
-	"os"
-	"io/ioutil"
 )
 
 func TestEncode(t *testing.T) {
@@ -19,6 +19,24 @@ func TestEncode(t *testing.T) {
 	}
 
 	s, err := Encode(f)
+	if err != nil {
+		t.Fatal(err.Error())
+	}
+
+	n := strings.TrimSpace(string(e))
+
+	if n != s {
+		t.Fatal("expected string is not equal")
+	}
+}
+
+func TestEncodeFile(t *testing.T) {
+	s, err := EncodeFile("fixtures/test_image.png")
+	if err != nil {
+		t.Fatal(err.Error())
+	}
+
+	e, err := ioutil.ReadFile("fixtures/test_image.txt")
 	if err != nil {
 		t.Fatal(err.Error())
 	}

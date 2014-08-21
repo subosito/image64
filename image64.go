@@ -1,11 +1,11 @@
 package image64
 
 import (
-	"fmt"
-	"net/http"
 	"encoding/base64"
+	"fmt"
 	"io"
 	"io/ioutil"
+	"net/http"
 )
 
 var contentTypes = []string{
@@ -45,7 +45,7 @@ func format(b []byte) (string, error) {
 	return fmt.Sprintf("data:%s;base64,%s", ct, encodeToString(b)), nil
 }
 
-// Encode converts r into base64 data URI scheme
+// Encode converts r to base64 data URI scheme
 func Encode(r io.Reader) (string, error) {
 	b, err := ioutil.ReadAll(r)
 	if err != nil {
@@ -55,3 +55,12 @@ func Encode(r io.Reader) (string, error) {
 	return format(b)
 }
 
+// EncodeFile open filename and convert it to base64 data URI scheme
+func EncodeFile(filename string) (string, error) {
+	b, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return "", err
+	}
+
+	return format(b)
+}
