@@ -1,0 +1,16 @@
+mode: set
+github.com/subosito/image64/image64.go:21.41,23.2 1 1
+github.com/subosito/image64/image64.go:25.40,26.30 1 1
+github.com/subosito/image64/image64.go:32.2,32.14 1 1
+github.com/subosito/image64/image64.go:26.30,27.27 1 1
+github.com/subosito/image64/image64.go:27.27,29.4 1 1
+github.com/subosito/image64/image64.go:35.38,37.2 1 1
+github.com/subosito/image64/image64.go:39.39,42.29 2 1
+github.com/subosito/image64/image64.go:46.2,46.69 1 1
+github.com/subosito/image64/image64.go:42.29,44.3 1 1
+github.com/subosito/image64/image64.go:50.42,52.16 2 1
+github.com/subosito/image64/image64.go:56.2,56.18 1 1
+github.com/subosito/image64/image64.go:52.16,54.3 1 0
+github.com/subosito/image64/image64.go:60.50,62.16 2 1
+github.com/subosito/image64/image64.go:66.2,66.18 1 1
+github.com/subosito/image64/image64.go:62.16,64.3 1 0

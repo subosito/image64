@@ -1,11 +1,11 @@
 package image64
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"strings"
 	"testing"
-	"fmt"
 )
 
 var fixtures = []string{
@@ -63,5 +63,12 @@ func TestEncodeFile(t *testing.T) {
 		if n != s {
 			t.Fatalf("expected string is not equal: %q != %q", n, s)
 		}
+	}
+}
+
+func TestEncodeFile_unsupported(t *testing.T) {
+	_, err := EncodeFile("fixtures/test_format.pdf")
+	if err == nil {
+		t.Fatalf("EncodeFile should returns Unsupported error for application/pdf")
 	}
 }
