@@ -44,6 +44,20 @@ func TestEncode(t *testing.T) {
 	}
 }
 
+type badReader struct{}
+
+func (b *badReader) Read(p []byte) (int, error) {
+	return 0, fmt.Errorf("I/O error")
+}
+
+func TestEncode_failure(t *testing.T) {
+	r := &badReader{}
+	_, err := Encode(r)
+	if err == nil {
+		t.Fatalf("Encode should returns error when r returning error")
+	}
+}
+
 func TestEncodeFile(t *testing.T) {
 	for i := range fixtures {
 		x := fixtures[i]
@@ -70,5 +84,12 @@ func TestEncodeFile_unsupported(t *testing.T) {
 	_, err := EncodeFile("fixtures/test_format.pdf")
 	if err == nil {
 		t.Fatalf("EncodeFile should returns Unsupported error for application/pdf")
+	}
+}
+
+func TestEncodeFile_failure(t *testing.T) {
+	_, err := EncodeFile("fixture_not_exist")
+	if err == nil {
+		t.Fatalf("EncodeFile should returns error when file is not exist")
 	}
 }
